@@ -69,7 +69,7 @@ public class UI
     public boolean startNewGame() {
         System.out.println(Constants.START_NEW_GAME);
         String yesOrNo = scanner.next();
-        return yesOrNo == "T";
+        return yesOrNo.equals("Y") || yesOrNo.equals("y");
     }
 
     // Printing text methods
@@ -86,8 +86,8 @@ public class UI
         }
     }
 
-    public void printInvalidRowOrColumn(int rowOrCol) {
-        System.out.printf(Constants.INVALID_ROW_OR_COLUMN, rowOrCol);
+    public void printInvalidRowOrColumn() {
+        System.out.printf(Constants.INVALID_ROW_OR_COLUMN);
     }
 
     public void printInvalidMove(int row, int col) {

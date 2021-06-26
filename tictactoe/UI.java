@@ -29,7 +29,7 @@ public class UI
     }
 
     // Prompt for input methods
-    public String promptForName(int player) {
+    public String promptForName(String player) {
         System.out.printf(Constants.GET_PLAYER_NAME, player);
         return scanner.next();
     }

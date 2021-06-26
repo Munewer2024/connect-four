@@ -102,6 +102,7 @@ public class UI
             row, 
             col
         );
+        System.out.println();
     } 
 
     public void printWinner(State state) {

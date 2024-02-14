@@ -51,7 +51,7 @@ public class State
         return whoseMove;
     }
 
-    public void setWhoseMore(int whoseMove) {
+    public void setWhoseMove(int whoseMove) {
         this.whoseMove = whoseMove;
     }
 

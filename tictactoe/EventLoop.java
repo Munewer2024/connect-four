@@ -18,7 +18,7 @@ public class EventLoop {
         state.setGameState(Constants.GET_O_NAME);
     
       } else if (gameState == Constants.GET_O_NAME) {
-        state.setYName(ui.promptForName(Constants.O));
+        state.setOName(ui.promptForName(Constants.O));
         state.setGameState(Constants.GET_X_MOVE);
     
       } else if (gameState == Constants.GET_X_MOVE) {
@@ -53,7 +53,7 @@ public class EventLoop {
 
       } else if (gameState == Constants.CHECK_IF_TIE) {
         if (state.isTie()) {
-          ui.printTie();
+          ui.printTieGame();
           state.setGameState(Constants.GAME_OVER);
         } else {
           state.setWhoseMove(state.getWhoseMove() * -1);

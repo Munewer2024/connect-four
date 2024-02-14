@@ -1,4 +1,5 @@
 package tictactoe;
+import java.util.Scanner;
 
 /**
  * UI class
@@ -6,11 +7,11 @@ package tictactoe;
 public class UI
 {
 
-    Scanner scanner;
+Scanner scanner;
 
-    public UI() {
-        scanner = new Scanner(System.in);         
-    }
+public UI() {
+    scanner = new Scanner(System.in);         
+}
 
 // Utility methods
 public String getXOrO(int whoseMove) {
@@ -21,7 +22,7 @@ public String getPlayerName(int whoseMove, String xName, String yName) {
   return (whoseMove == -1) ? xName : yName;
 }
 
-public boolean isLegalMove(int state, int row, int col) {
+public boolean isLegalMove(State state, int row, int col) {
   return 1 <= row && row <= Constants.BOARD_SIZE &&
     1 <= col && col <= Constants.BOARD_SIZE &&
     state.getBoardCell(row, col) == Constants.BLANK;
@@ -33,11 +34,11 @@ public String promptForName(int player) {
     return scanner.next();
 }
 
-public int getMoveRow(int whoseMove) {
+public int getMoveRow(State state, int whoseMove) {
     int row;
     while (row <= 0 || row >= 4) {
         try {
-            System.out.printf(Constants.GET_ROW_MOVE, getXOrO(whoseMove), getPlayerName(whoseMove));
+            System.out.printf(Constants.GET_ROW_MOVE, getXOrO(whoseMove), getPlayerName(whoseMove, state.getXName(), state.getOName()));
             row = scanner.nextInt();
         } catch (Exception e) {
             System.out.println(Constants.INVALID_ROW_OR_COLUMN);
@@ -46,11 +47,11 @@ public int getMoveRow(int whoseMove) {
     return row;
 }
 
-public int getMoveCol(int whoseMove) {
+public int getMoveCol(State state, int whoseMove) {
     int col;
     while (col <= 0 || col >= 4) {
         try {
-            System.out.printf(Constants.GET_COL_MOVE, getXOrO(whoseMove), getPlayerName(whoseMove));
+            System.out.printf(Constants.GET_COL_MOVE, getXOrO(whoseMove), getPlayerName(whoseMove, state.getXName(), state.getOName()));
             col = scanner.nextInt();
         } catch (Exception e) {
             System.out.println(Constants.INVALID_ROW_OR_COLUMN);
@@ -87,11 +88,11 @@ public void printInvalidMove(int row, int col) {
 }
 
 public void printMove(State state, int row, int col) {
-    System.out.printf(Constants.PRINT_MOVE, getXOrO(state.getWhoseMove(), getPlayerName(state.whoseMove), row, col));
+    System.out.printf(Constants.PRINT_MOVE, getXOrO(state.getWhoseMove()), getPlayerName(state.getWhoseMove(), state.getXName(), state.getOName()), row, col);
 } 
 
 public void printWinner(State state) {
-    System.out.printf(Constants.WINNER, getXOrO(state.getWhoseMove()), state.getPlayerName(state.whoseMove));
+    System.out.printf(Constants.WINNER, getXOrO(state.getWhoseMove()), getPlayerName(state.getWhoseMove(), state.getXName(), state.getOName()));
 }
 
 public void printTieGame() {

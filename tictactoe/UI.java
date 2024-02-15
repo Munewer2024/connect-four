@@ -35,7 +35,7 @@ public String promptForName(int player) {
 }
 
 public int getMoveRow(State state, int whoseMove) {
-    int row;
+    int row = 0;
     while (row <= 0 || row >= 4) {
         try {
             System.out.printf(Constants.GET_ROW_MOVE, getXOrO(whoseMove), getPlayerName(whoseMove, state.getXName(), state.getOName()));
@@ -48,7 +48,7 @@ public int getMoveRow(State state, int whoseMove) {
 }
 
 public int getMoveCol(State state, int whoseMove) {
-    int col;
+    int col = 0;
     while (col <= 0 || col >= 4) {
         try {
             System.out.printf(Constants.GET_COL_MOVE, getXOrO(whoseMove), getPlayerName(whoseMove, state.getXName(), state.getOName()));

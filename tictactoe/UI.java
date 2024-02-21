@@ -14,8 +14,8 @@ public UI() {
 }
 
 // Utility methods
-public String getXOrO(int whoseMove) {
-  return (whoseMove == -1) ? "X" : "O";
+public String getRedOrBlack(int whoseMove) {
+  return (whoseMove == -1) ? "R" : "B";
 }
 
 public String getPlayerName(int whoseMove, String xName, String yName) {
@@ -23,8 +23,8 @@ public String getPlayerName(int whoseMove, String xName, String yName) {
 }
 
 public boolean isLegalMove(State state, int row, int col) {
-  return 1 <= row && row <= Constants.BOARD_SIZE &&
-    1 <= col && col <= Constants.BOARD_SIZE &&
+  return 1 <= row && row <= Constants.BOARD_ROWS &&
+    1 <= col && col <= Constants.BOARD_COLUMNS &&
     state.getBoardCell(row, col) == Constants.BLANK;
 }
 
@@ -38,7 +38,7 @@ public int getMoveRow(State state, int whoseMove) {
     int row = 0;
     while (row <= 0 || row >= 4) {
         try {
-            System.out.printf(Constants.GET_ROW_MOVE, getXOrO(whoseMove), getPlayerName(whoseMove, state.getXName(), state.getOName()));
+            System.out.printf(Constants.GET_ROW_MOVE, getRedOrBlack(whoseMove), getPlayerName(whoseMove, state.getRedName(), state.getBlackName()));
             row = scanner.nextInt();
         } catch (Exception e) {
             System.out.println(Constants.INVALID_ROW_OR_COLUMN);
@@ -51,7 +51,7 @@ public int getMoveCol(State state, int whoseMove) {
     int col = 0;
     while (col <= 0 || col >= 4) {
         try {
-            System.out.printf(Constants.GET_COL_MOVE, getXOrO(whoseMove), getPlayerName(whoseMove, state.getXName(), state.getOName()));
+            System.out.printf(Constants.GET_COL_MOVE, getRedOrBlack(whoseMove), getPlayerName(whoseMove, state.getRedName(), state.getBlackName()));
             col = scanner.nextInt();
         } catch (Exception e) {
             System.out.println(Constants.INVALID_ROW_OR_COLUMN);
@@ -73,8 +73,10 @@ public void printWelcome() {
 
 public void printBoard(State state) {
     System.out.println(Constants.DIVIDER_STRING);
-    for (int row = 0; row < Constants.BOARD_SIZE; row++) {
-        System.out.printf(Constants.BOARD_STRING, getXOrO(state.getBoardCell(row, 0)), getXOrO(state.getBoardCell(row, 1)), getXOrO(state.getBoardCell(row, 2)));
+    for (int row = 0; row < Constants.BOARD_ROWS; row++) {
+        for (int col = 0; col < Constants.BOARD_COLUMNS; col++) {
+            System.out.printf(Constants.BOARD_STRING, getRedOrBlack(state.getBoardCell(row, col)));
+        }
         System.out.println(Constants.DIVIDER_STRING);
     }
 }
@@ -88,11 +90,11 @@ public void printInvalidMove(int row, int col) {
 }
 
 public void printMove(State state, int row, int col) {
-    System.out.printf(Constants.PRINT_MOVE, getXOrO(state.getWhoseMove()), getPlayerName(state.getWhoseMove(), state.getXName(), state.getOName()), row, col);
+    System.out.printf(Constants.PRINT_MOVE, getRedOrBlack(state.getWhoseMove()), getPlayerName(state.getWhoseMove(), state.getRedName(), state.getBlackName()), row, col);
 } 
 
 public void printWinner(State state) {
-    System.out.printf(Constants.WINNER, getXOrO(state.getWhoseMove()), getPlayerName(state.getWhoseMove(), state.getXName(), state.getOName()));
+    System.out.printf(Constants.WINNER, getRedOrBlack(state.getWhoseMove()), getPlayerName(state.getWhoseMove(), state.getRedName(), state.getBlackName()));
 }
 
 public void printTieGame() {

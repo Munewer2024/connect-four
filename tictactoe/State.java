@@ -6,18 +6,18 @@ package tictactoe;
 public class State
 {
     private int gameState = Constants.STANDBY;
-    private int whoseMove = Constants.X;
-    private String xName = "";
-    private String oName = "";
-    private int[][] board = new int[Constants.BOARD_SIZE][Constants.BOARD_SIZE];
+    private int whoseMove = Constants.RED;
+    private String redName = "";
+    private String blackName = "";
+    private int[][] board = new int[Constants.BOARD_ROWS][Constants.BOARD_COLUMNS];
 
     public boolean isWinner() {
         int total;
-        for (int row=0; row<Constants.BOARD_SIZE; row++) {
+        for (int row=0; row< Constants.BOARD_ROWS; row++) {
             total = getBoardCell(row, 0) + getBoardCell(row,1) + getBoardCell(row,2);
             if (total == -3 || total == 3) return true;
         }
-        for (int col=0; col<Constants.BOARD_SIZE; col++) {
+        for (int col=0; col<Constants.BOARD_COLUMNS; col++) {
             total = getBoardCell(0, col) + getBoardCell(1,col) + getBoardCell(2, col);
             if (total == -3 || total == 3) return true;
         }
@@ -29,8 +29,8 @@ public class State
     }
 
     public boolean isTie() {
-        for (int row=0; row<Constants.BOARD_SIZE; row++) {
-            for (int col=0; col<Constants.BOARD_SIZE; col++) {
+        for (int row=0; row<Constants.BOARD_ROWS; row++) {
+            for (int col=0; col<Constants.BOARD_COLUMNS; col++) {
                 if (getBoardCell(row,col) == Constants.BLANK) {
                     return false;
                 }
@@ -55,20 +55,20 @@ public class State
         this.whoseMove = whoseMove;
     }
 
-    public String getXName() {
-        return xName;
+    public String getRedName() {
+        return redName;
     }
 
-    public void setXName(String xName) {
-        this.xName = xName;
+    public void setRedName(String redName) {
+        this.redName = redName;
     }
 
-    public String getOName() {
-        return oName;
+    public String getBlackName() {
+        return blackName;
     }
 
-    public void setOName(String oName) {
-        this.oName = oName;
+    public void setBlackName(String blackName) {
+        this.blackName = blackName;
     }
 
     public int getBoardCell(int row, int col) {

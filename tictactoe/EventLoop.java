@@ -11,41 +11,39 @@ public class EventLoop {
     while (state.getGameState() != Constants.QUIT_PROGRAM) {
       int gameState = state.getGameState();
       if (gameState == Constants.STANDBY) {
-        state.setGameState(Constants.GET_X_NAME);
-
-      } else if (gameState == Constants.GET_X_NAME) {
-        state.setXName(ui.promptForName(Constants.X));
-        state.setGameState(Constants.GET_O_NAME);
+        state.setGameState(Constants.GET_RED_NAME);
+      } else if (gameState == Constants.GET_RED_NAME) {
+        state.setRedName(ui.promptForName(Constants.RED));
+        state.setGameState(Constants.GET_BLACK_NAME);
+      } else if (gameState == Constants.GET_BLACK_NAME) {
+        state.setBlackName(ui.promptForName(Constants.BLACK));
+        state.setGameState(Constants.GET_RED_MOVE);
     
-      } else if (gameState == Constants.GET_O_NAME) {
-        state.setOName(ui.promptForName(Constants.O));
-        state.setGameState(Constants.GET_X_MOVE);
-    
-      } else if (gameState == Constants.GET_X_MOVE) {
+      } else if (gameState == Constants.GET_RED_MOVE) {
         row = ui.getMoveRow(state, state.getWhoseMove());
         col = ui.getMoveCol(state, state.getWhoseMove());
         if (ui.isLegalMove(state, row, col)) {
           state.setGameState(Constants.MAKE_MOVE);
         }
-
-      } else if (gameState == Constants.GET_O_MOVE) {
+        ui.printBoard(state);
+      } else if (gameState == Constants.GET_BLACK_MOVE) {
         row = ui.getMoveRow(state, state.getWhoseMove());
         col = ui.getMoveCol(state, state.getWhoseMove());
         if (ui.isLegalMove(state, row, col)) {
           state.setGameState(Constants.MAKE_MOVE);
         }
-
+        ui.printBoard(state);
       } else if (gameState == Constants.MAKE_MOVE) {
         ui.printMove(state, row, col);
-        state.setBoardCell(state.getWhoseMove(), row, col);
+        state.setBoardCell(row, col, state.getWhoseMove());
         state.setGameState(Constants.CHECK_IF_WINNER);
 
       } else if (gameState == Constants.CHECK_IF_WINNER) {
         if (state.isWinner()) {
-          if (state.getWhoseMove() == Constants.X) {
-            state.setGameState(Constants.X_WINS);
+          if (state.getWhoseMove() == Constants.RED) {
+            state.setGameState(Constants.RED_WINS);
           } else {
-            state.setGameState(Constants.O_WINS);
+            state.setGameState(Constants.BLACK_WINS);
           }
         } else {
           state.setGameState(Constants.CHECK_IF_TIE);
@@ -57,18 +55,18 @@ public class EventLoop {
           state.setGameState(Constants.GAME_OVER);
         } else {
           state.setWhoseMove(state.getWhoseMove() * -1);
-          if (state.getWhoseMove() == Constants.X) {
-            state.setGameState(Constants.GET_X_MOVE);
+          if (state.getWhoseMove() == Constants.RED) {
+            state.setGameState(Constants.GET_RED_MOVE);
           } else {
-            state.setGameState(Constants.GET_O_MOVE);
+            state.setGameState(Constants.GET_BLACK_MOVE);
           }
         }
 
-      } else if (gameState == Constants.X_WINS) {
+      } else if (gameState == Constants.RED_WINS) {
         ui.printWinner(state);
         state.setGameState(Constants.GAME_OVER);
     
-      } else if (gameState == Constants.O_WINS) {
+      } else if (gameState == Constants.BLACK_WINS) {
         ui.printWinner(state);
         state.setGameState(Constants.GAME_OVER);
 

@@ -36,7 +36,7 @@ public String promptForName(int player) {
 
 public int getMoveRow(State state, int whoseMove) {
     int row = 0;
-    while (row <= 0 || row >= 4) {
+    while (row <= 0 || row >= Constants.BOARD_ROWS - 1) {
         try {
             System.out.printf(Constants.GET_ROW_MOVE, getRedOrBlack(whoseMove), getPlayerName(whoseMove, state.getRedName(), state.getBlackName()));
             row = scanner.nextInt();
@@ -49,7 +49,7 @@ public int getMoveRow(State state, int whoseMove) {
 
 public int getMoveCol(State state, int whoseMove) {
     int col = 0;
-    while (col <= 0 || col >= 4) {
+    while (col <= 0 || col >= Constants.BOARD_COLUMNS - 1) {
         try {
             System.out.printf(Constants.GET_COL_MOVE, getRedOrBlack(whoseMove), getPlayerName(whoseMove, state.getRedName(), state.getBlackName()));
             col = scanner.nextInt();
@@ -72,12 +72,17 @@ public void printWelcome() {
 }
 
 public void printBoard(State state) {
-    System.out.println(Constants.DIVIDER_STRING);
     for (int row = 0; row < Constants.BOARD_ROWS; row++) {
+        if (row == 0) {
+            System.out.println(Constants.DIVIDER_STRING);
+        }
         for (int col = 0; col < Constants.BOARD_COLUMNS; col++) {
             System.out.printf(Constants.BOARD_STRING, getRedOrBlack(state.getBoardCell(row, col)));
         }
-        System.out.println(Constants.DIVIDER_STRING);
+        System.out.println();
+        if (row == Constants.BOARD_ROWS - 1) {
+            System.out.println(Constants.DIVIDER_STRING);
+        }
     }
 }
 

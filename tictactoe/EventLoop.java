@@ -25,17 +25,16 @@ public class EventLoop {
         if (ui.isLegalMove(state, row, col)) {
           state.setGameState(Constants.MAKE_MOVE);
         }
-        ui.printBoard(state);
       } else if (gameState == Constants.GET_BLACK_MOVE) {
         row = ui.getMoveRow(state, state.getWhoseMove());
         col = ui.getMoveCol(state, state.getWhoseMove());
         if (ui.isLegalMove(state, row, col)) {
           state.setGameState(Constants.MAKE_MOVE);
         }
-        ui.printBoard(state);
       } else if (gameState == Constants.MAKE_MOVE) {
         ui.printMove(state, row, col);
         state.setBoardCell(row, col, state.getWhoseMove());
+        ui.printBoard(state);
         state.setGameState(Constants.CHECK_IF_WINNER);
 
       } else if (gameState == Constants.CHECK_IF_WINNER) {

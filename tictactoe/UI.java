@@ -23,9 +23,16 @@ public String getPlayerName(int whoseMove, String xName, String yName) {
 }
 
 public boolean isLegalMove(State state, int row, int col) {
-   return 1 <= row && row <= Constants.BOARD_ROWS 
-   && 1 <= col && col <= Constants.BOARD_COLUMNS 
-   && state.getBoardCell(row, col) == Constants.BLANK;
+   if (row == 0) {
+       if (state.getBoardCell(row, col) == 0) {
+           return true;
+       }
+   } else {
+       if (state.getBoardCell(row - 1, col) != 0) {
+           return true;
+       }
+   }
+   return false;
 }
 
 // Prompt for input methods
@@ -40,6 +47,7 @@ public int getMoveRow(State state, int whoseMove) {
         try {
             System.out.printf(Constants.GET_ROW_MOVE, getRedOrBlack(whoseMove), getPlayerName(whoseMove, state.getRedName(), state.getBlackName()));
             row = scanner.nextInt();
+            row = Constants.BOARD_ROWS - row;
         } catch (Exception e) {
             System.out.println(Constants.INVALID_ROW_OR_COLUMN);
         }
@@ -53,6 +61,7 @@ public int getMoveCol(State state, int whoseMove) {
         try {
             System.out.printf(Constants.GET_COL_MOVE, getRedOrBlack(whoseMove), getPlayerName(whoseMove, state.getRedName(), state.getBlackName()));
             col = scanner.nextInt();
+            col--;
         } catch (Exception e) {
             System.out.println(Constants.INVALID_ROW_OR_COLUMN);
         }

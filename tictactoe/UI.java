@@ -23,14 +23,13 @@ public String getPlayerName(int whoseMove, String xName, String yName) {
 }
 
 public boolean isLegalMove(State state, int row, int col) {
-   if (row == 0) {
+   if (row == 5) {
        if (state.getBoardCell(row, col) == 0) {
            return true;
        }
-   } else {
-       if (state.getBoardCell(row - 1, col) != 0) {
-           return true;
-       }
+   }
+   if (state.getBoardCell(row + 1, col) != 0) {
+        return true;
    }
    return false;
 }
@@ -42,12 +41,11 @@ public String promptForName(int player) {
 }
 
 public int getMoveRow(State state, int whoseMove) {
-    int row = 0;
-    while (row <= 0 || row >= Constants.BOARD_ROWS - 1) {
+    int row = -1;
+    while (row < 0 || row > Constants.BOARD_ROWS - 1) {
         try {
             System.out.printf(Constants.GET_ROW_MOVE, getRedOrBlack(whoseMove), getPlayerName(whoseMove, state.getRedName(), state.getBlackName()));
-            row = scanner.nextInt();
-            row = Constants.BOARD_ROWS - row;
+            row = Constants.BOARD_ROWS - scanner.nextInt();
         } catch (Exception e) {
             System.out.println(Constants.INVALID_ROW_OR_COLUMN);
         }
@@ -56,12 +54,11 @@ public int getMoveRow(State state, int whoseMove) {
 }
 
 public int getMoveCol(State state, int whoseMove) {
-    int col = 0;
-    while (col <= 0 || col >= Constants.BOARD_COLUMNS - 1) {
+    int col = -1;
+    while (col < 0 || col > Constants.BOARD_COLUMNS - 1) {
         try {
             System.out.printf(Constants.GET_COL_MOVE, getRedOrBlack(whoseMove), getPlayerName(whoseMove, state.getRedName(), state.getBlackName()));
-            col = scanner.nextInt();
-            col--;
+            col = scanner.nextInt() - 1;
         } catch (Exception e) {
             System.out.println(Constants.INVALID_ROW_OR_COLUMN);
         }
@@ -88,6 +85,7 @@ public String isEmpty(State state, int row, int col) {
 }
 
 public void printBoard(State state) {
+    System.out.println();
     for (int row = 0; row < Constants.BOARD_ROWS; row++) {
         if (row == 0) {
             System.out.println(Constants.DIVIDER_STRING);

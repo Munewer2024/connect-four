@@ -28,6 +28,9 @@ public boolean isLegalMove(State state, int row, int col) {
            return true;
        }
    }
+   if (state.getBoardCell(row, col) != 0) {
+       return false;
+   }
    if (state.getBoardCell(row + 1, col) != 0) {
         return true;
    }

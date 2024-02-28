@@ -12,25 +12,18 @@ public class State
     private int[][] board = new int[Constants.BOARD_ROWS][Constants.BOARD_COLUMNS];
 
     public boolean isWinner() {
-        int total;
-        for (int row=0; row< Constants.BOARD_ROWS; row++) {
-            total = getBoardCell(row, 0) + getBoardCell(row,1) + getBoardCell(row,2);
-            if (total == -3 || total == 3) return true;
+        for (int row = Constants.BOARD_ROWS - 1; row <= 0; row--) {
+            for (int col = 0; col < Constants.BOARD_COLUMNS - 3; col++) {
+                if (getBoardCell(row, col) == getBoardCell(row, col + 1) && getBoardCell(row, col) == getBoardCell(row, col + 2) && getBoardCell(row, col) == getBoardCell(row, col + 3) && getBoardCell(row, col) != 0) {
+                    return true;
+                }
+            }
         }
-        for (int col=0; col<Constants.BOARD_COLUMNS; col++) {
-            total = getBoardCell(0, col) + getBoardCell(1,col) + getBoardCell(2, col);
-            if (total == -3 || total == 3) return true;
-        }
-        total = getBoardCell(0, 0) + getBoardCell(1,1) + getBoardCell(2, 2);
-        if (total == -3 || total == 3) return true;
-        total = getBoardCell(2, 0) + getBoardCell(1,1) + getBoardCell(0, 2);
-        if (total == -3 || total == 3) return true;
         return false;
     }
-
     public boolean isTie() {
-        for (int row=0; row<Constants.BOARD_ROWS; row++) {
-            for (int col=0; col<Constants.BOARD_COLUMNS; col++) {
+        for (int row = 0; row < Constants.BOARD_ROWS; row++) {
+            for (int col = 0; col < Constants.BOARD_COLUMNS; col++) {
                 if (getBoardCell(row,col) == Constants.BLANK) {
                     return false;
                 }

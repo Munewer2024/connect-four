@@ -12,9 +12,34 @@ public class State
     private int[][] board = new int[Constants.BOARD_ROWS][Constants.BOARD_COLUMNS];
 
     public boolean isWinner() {
-        for (int row = Constants.BOARD_ROWS - 1; row <= 0; row--) {
+        // Checks Horizontally
+        for (int row = 0; row < Constants.BOARD_ROWS; row++) {
             for (int col = 0; col < Constants.BOARD_COLUMNS - 3; col++) {
                 if (getBoardCell(row, col) == getBoardCell(row, col + 1) && getBoardCell(row, col) == getBoardCell(row, col + 2) && getBoardCell(row, col) == getBoardCell(row, col + 3) && getBoardCell(row, col) != 0) {
+                    return true;
+                }
+            }
+        }
+        // Checks Vertically
+        for (int row = 0; row < Constants.BOARD_ROWS - 3; row++) {
+            for (int col = 0; col < Constants.BOARD_COLUMNS; col++) {
+                if (getBoardCell(row, col) == getBoardCell(row + 1, col) && getBoardCell(row, col) == getBoardCell(row + 2, col) && getBoardCell(row, col) == getBoardCell(row + 3, col) && getBoardCell(row, col) != 0) {
+                    return true;
+                }
+            }
+        }
+        // Checks Diagonally
+        for (int row = Constants.BOARD_ROWS - 1; row < 0; row--) {
+            for (int col = 0; col < Constants.BOARD_COLUMNS - 3; col++) {
+                if (getBoardCell(row, col) == getBoardCell(row - 1, col + 1) && getBoardCell(row, col) == getBoardCell(row - 2, col + 2) && getBoardCell(row, col) == getBoardCell(row - 3, col + 3) && getBoardCell(row, col) != 0) {
+                    return true;
+                }
+            }
+        }
+        // Checks Diagonally in Reverse
+        for (int row = Constants.BOARD_ROWS - 1; row < 0; row--) {
+            for (int col = Constants.BOARD_COLUMNS - 1; col < 0; col--) {
+                if (getBoardCell(row, col) == getBoardCell(row - 1, col - 1) && getBoardCell(row, col) == getBoardCell(row - 2, col - 2) && getBoardCell(row, col) == getBoardCell(row - 3, col - 3) && getBoardCell(row, col) != 0) {
                     return true;
                 }
             }

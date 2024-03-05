@@ -20,14 +20,13 @@ public class EventLoop {
         state.setGameState(Constants.GET_RED_MOVE);
     
       } else if (gameState == Constants.GET_RED_MOVE) {
-        row = ui.getMoveRow(state, state.getWhoseMove());
         col = ui.getMoveCol(state, state.getWhoseMove());
         if (ui.isLegalMove(state, row, col)) {
           state.setGameState(Constants.MAKE_MOVE);
         }
       } else if (gameState == Constants.GET_BLACK_MOVE) {
-        row = ui.getMoveRow(state, state.getWhoseMove());
         col = ui.getMoveCol(state, state.getWhoseMove());
+        row = ui.getMoveRow(state, col);
         if (ui.isLegalMove(state, row, col)) {
           state.setGameState(Constants.MAKE_MOVE);
         }

@@ -28,24 +28,25 @@ public class State
                 }
             }
         }
-        // Checks Diagonally
-        for (int row = Constants.BOARD_ROWS - 1; row < 0; row--) {
-            for (int col = 0; col < Constants.BOARD_COLUMNS - 3; col++) {
-                if (getBoardCell(row, col) == getBoardCell(row - 1, col + 1) && getBoardCell(row, col) == getBoardCell(row - 2, col + 2) && getBoardCell(row, col) == getBoardCell(row - 3, col + 3) && getBoardCell(row, col) != 0) {
+        // Checks Diagonally (Top Bottom Right)
+        for (int row = 0; row < Constants.BOARD_ROWS - 3; row++) {
+            for (int col = Constants.BOARD_COLUMNS - 1; col > 2; col--) {
+                if (getBoardCell(row, col) == getBoardCell(row + 1, col - 1) && getBoardCell(row, col) == getBoardCell(row + 2, col - 2) && getBoardCell(row, col) == getBoardCell(row + 3, col - 3) && getBoardCell(row, col) != 0) {
                     return true;
                 }
             }
         }
-        // Checks Diagonally in Reverse
-        for (int row = Constants.BOARD_ROWS - 1; row < 0; row--) {
-            for (int col = Constants.BOARD_COLUMNS - 1; col < 0; col--) {
-                if (getBoardCell(row, col) == getBoardCell(row - 1, col - 1) && getBoardCell(row, col) == getBoardCell(row - 2, col - 2) && getBoardCell(row, col) == getBoardCell(row - 3, col - 3) && getBoardCell(row, col) != 0) {
+        // Checks Diagonally (Top Bottom Left)
+        for (int row = 0; row < Constants.BOARD_ROWS - 3; row++) {
+            for (int col = 0; col < Constants.BOARD_COLUMNS - 3; col++) {
+                if (getBoardCell(row, col) == getBoardCell(row + 1, col + 1) && getBoardCell(row, col) == getBoardCell(row + 2, col + 2) && getBoardCell(row, col) == getBoardCell(row + 3, col + 3) && getBoardCell(row, col) != 0) {
                     return true;
                 }
             }
         }
         return false;
     }
+    
     public boolean isTie() {
         for (int row = 0; row < Constants.BOARD_ROWS; row++) {
             for (int col = 0; col < Constants.BOARD_COLUMNS; col++) {

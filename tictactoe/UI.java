@@ -23,7 +23,12 @@ public String getPlayerName(int whoseMove, String xName, String yName) {
 }
 
 public boolean isLegalMove(State state, int row, int col) {
-   if (state.getBoardCell(row, col) == 0) {
+   if (row == 5) {
+       if (state.getBoardCell(row, col) == 0) {
+           return true;
+       }
+   }
+   if (state.getBoardCell(row - 1, col) == 0) {
        return true;
    }
    return false;
@@ -37,9 +42,10 @@ public String promptForName(int player) {
 
 public int getMoveRow(State state, int col) {
     int row = 0;
-    for (int i = Constants.BOARD_ROWS - 1; i <= 0; i++) {
+    for (int i = Constants.BOARD_ROWS - 1; i >= 0; i--) {
         if (state.getBoardCell(i, col) == 0) {
             row = i;
+            break;
         }
     }
     return row;

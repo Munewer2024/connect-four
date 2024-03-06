@@ -21,6 +21,7 @@ public class EventLoop {
     
       } else if (gameState == Constants.GET_RED_MOVE) {
         col = ui.getMoveCol(state, state.getWhoseMove());
+        row = ui.getMoveRow(state, col);
         if (ui.isLegalMove(state, row, col)) {
           state.setGameState(Constants.MAKE_MOVE);
         }

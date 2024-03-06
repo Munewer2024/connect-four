@@ -77,7 +77,7 @@ public void printWelcome() {
 
 public String isEmpty(State state, int row, int col) {
     if (state.getBoardCell(row, col) == 0) {
-        return "E";
+        return "";
     }
     return getRedOrBlack(state.getBoardCell(row, col));
 }
